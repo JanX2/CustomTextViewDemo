@@ -92,18 +92,26 @@
 } 
 
 // Forward the drop to the delegate, or else, its window's delegate
+// If they can handle it answer == YES and we return YES, otherwise we pass it to super
 - (BOOL)performDragOperation:(id <NSDraggingInfo>)sender {
     BOOL answer = NO ;
 	if ([self respondsToSelector:@selector(delegate)]) {
-		answer = [(id <SSYDragDestinationTextViewDelegate>)[self delegate] performDragOperation:sender
-										   destination:self] ;
+		answer = [(id <SSYDragDestinationTextViewDelegate>)[self delegate] 
+				  performDragOperation:sender
+				  destination:self] ;
 	}
 	else if ([[[self window] delegate] respondsToSelector:@selector(performDragOperation:destination:)]) {
-		answer = [(id <SSYDragDestinationTextViewDelegate>)[[self window] delegate] performDragOperation:sender
+		answer = [(id <SSYDragDestinationTextViewDelegate>)[[self window] delegate] 
+				  performDragOperation:sender
 				  destination:self] ;
 	}
 	
-	return answer ;
+	if (answer) {
+		return YES ;
+	}
+	else {
+		return [super performDragOperation:sender] ;
+	}
 }
 
 - (void)concludeDragOperation:(id <NSDraggingInfo>)sender {
