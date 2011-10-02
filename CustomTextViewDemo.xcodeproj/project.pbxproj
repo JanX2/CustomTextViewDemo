@@ -35,9 +35,9 @@
 		3D5D5CD514386CC8009812B8 /* NSView+FocusRing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSView+FocusRing.m"; sourceTree = "<group>"; };
 		3D5D5CD614386CC8009812B8 /* SSYDragDestinationTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSYDragDestinationTextView.h; sourceTree = "<group>"; };
 		3D5D5CD714386CC8009812B8 /* SSYDragDestinationTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSYDragDestinationTextView.m; sourceTree = "<group>"; };
-		3D5D5CDD14386E69009812B8 /* SSYDragDestinationTextViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSYDragDestinationTextViewDelegate.h; sourceTree = "<group>"; };
 		3D5D5D1314387B16009812B8 /* CustomWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomWindowController.h; sourceTree = "<group>"; };
 		3D5D5D1414387B16009812B8 /* CustomWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomWindowController.m; sourceTree = "<group>"; };
+		3D5D5D571438CBB2009812B8 /* SSYDragDestinationTextViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSYDragDestinationTextViewDelegate.h; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* CustomTextViewDemo-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "CustomTextViewDemo-Info.plist"; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* CustomTextViewDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CustomTextViewDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -109,7 +109,6 @@
 			children = (
 				256AC3F00F4B6AF500CF3369 /* CustomTextViewDemo_Prefix.pch */,
 				29B97316FDCFA39411CA2CEA /* main.m */,
-				3D5D5CDD14386E69009812B8 /* SSYDragDestinationTextViewDelegate.h */,
 			);
 			name = "Other Sources";
 			sourceTree = "<group>";
@@ -150,6 +149,7 @@
 				3D5D5CD514386CC8009812B8 /* NSView+FocusRing.m */,
 				3D5D5CD614386CC8009812B8 /* SSYDragDestinationTextView.h */,
 				3D5D5CD714386CC8009812B8 /* SSYDragDestinationTextView.m */,
+				3D5D5D571438CBB2009812B8 /* SSYDragDestinationTextViewDelegate.h */,
 			);
 			path = jerrykrinock;
 			sourceTree = "<group>";

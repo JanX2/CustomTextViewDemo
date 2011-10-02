@@ -16,11 +16,12 @@
 	[customTextView registerForDraggedTypes:[NSArray arrayWithObjects:NSFilenamesPboardType, nil]]; 
 }
 
-- (BOOL)performDragOperation:(id <NSDraggingInfo>)draggingInfo destination:(NSTextView *)destinationTextView
+- (BOOL)performDragOperation:(id <NSDraggingInfo>)sender
+				 destination:(SSYDragDestinationTextView *)destination;
 {
-	NSLog(@"\ndraggingInfo: %@\ndestination: %@", draggingInfo, destinationTextView);
+	NSLog(@"\nsender: %@\ndestination: %@", sender, destination);
 	
-	NSArray * pasteboardItems = [[draggingInfo draggingPasteboard] pasteboardItems];
+	NSArray *pasteboardItems = [[sender draggingPasteboard] pasteboardItems];
 	for (NSPasteboardItem *thisPBItem in pasteboardItems) {
 		NSArray *thisPBItemTypes = [thisPBItem types];
 		NSMutableDictionary *thisPBItemStringsDict = [NSMutableDictionary dictionaryWithCapacity:[thisPBItemTypes count]];
