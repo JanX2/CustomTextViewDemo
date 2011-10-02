@@ -93,7 +93,7 @@
 
 // Forward the drop to the delegate, or else, its window's delegate
 - (BOOL)performDragOperation:(id <NSDraggingInfo>)sender {
-    BOOL answer ;
+    BOOL answer = NO ;
 	if ([self respondsToSelector:@selector(delegate)]) {
 		answer = [(id <SSYDragDestinationTextViewDelegate>)[self delegate] performDragOperation:sender
 										   destination:self] ;
