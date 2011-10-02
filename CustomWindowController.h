@@ -8,9 +8,11 @@
 
 #import <Cocoa/Cocoa.h>
 
+#import "SSYDragDestinationTextView.h"
+#import "SSYDragDestinationTextViewDelegate.h"
 
-@interface CustomWindowController : NSWindowController {
-
+@interface CustomWindowController : NSWindowController <SSYDragDestinationTextViewDelegate> {
+	IBOutlet SSYDragDestinationTextView *	customTextView;
 }
 
 @end

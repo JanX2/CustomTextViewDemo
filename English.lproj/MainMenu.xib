@@ -1499,7 +1499,7 @@
 			<object class="NSCustomObject" id="976324537">
 				<string key="NSClassName">CustomTextViewDemoAppDelegate</string>
 			</object>
-			<object class="NSCustomObject" id="422630693">
+			<object class="NSCustomObject" id="832868439">
 				<string key="NSClassName">CustomWindowController</string>
 			</object>
 			<object class="NSCustomObject" id="755631768">
@@ -2192,10 +2192,26 @@
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
 						<string key="label">window</string>
-						<reference key="source" ref="422630693"/>
+						<reference key="source" ref="832868439"/>
 						<reference key="destination" ref="972006081"/>
 					</object>
 					<int key="connectionID">538</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">customTextView</string>
+						<reference key="source" ref="832868439"/>
+						<reference key="destination" ref="662824536"/>
+					</object>
+					<int key="connectionID">540</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">delegate</string>
+						<reference key="source" ref="662824536"/>
+						<reference key="destination" ref="832868439"/>
+					</object>
+					<int key="connectionID">541</int>
 				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -3272,7 +3288,7 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">537</int>
-						<reference key="object" ref="422630693"/>
+						<reference key="object" ref="832868439"/>
 						<reference key="parent" ref="0"/>
 					</object>
 				</object>
@@ -3818,7 +3834,7 @@
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">538</int>
+			<int key="maxID">541</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -3845,6 +3861,17 @@
 				<object class="IBPartialClassDescription">
 					<string key="className">CustomWindowController</string>
 					<string key="superclassName">NSWindowController</string>
+					<object class="NSMutableDictionary" key="outlets">
+						<string key="NS.key.0">customTextView</string>
+						<string key="NS.object.0">SSYDragDestinationTextView</string>
+					</object>
+					<object class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<string key="NS.key.0">customTextView</string>
+						<object class="IBToOneOutletInfo" key="NS.object.0">
+							<string key="name">customTextView</string>
+							<string key="candidateClassName">SSYDragDestinationTextView</string>
+						</object>
+					</object>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
 						<string key="minorKey">CustomWindowController.h</string>
