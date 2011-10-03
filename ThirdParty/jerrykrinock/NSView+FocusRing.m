@@ -1,6 +1,7 @@
 
 @implementation NSView (FocusRing)
 
+#if (MAC_OS_X_VERSION_MIN_REQUIRED < 1040)
 // Invoke the following metod during -awakeFromNib
 - (void)patchPreLeopardFocusRingDrawingForScrolling {
 	if (NSAppKitVersionNumber < 900) {
@@ -15,9 +16,12 @@
 		[(NSClipView*)clipView setCopiesOnScroll:NO] ;
 	}
 }
+#endif
 
 - (void)drawFocusRing {
+#if (MAC_OS_X_VERSION_MIN_REQUIRED < 1040)
 	[self lockFocus] ; // Needed in case we were not invoked from within drawRect:
+#endif
 	[[NSColor keyboardFocusIndicatorColor] set];
 	NSRect rect = [self visibleRect] ;
 	[NSGraphicsContext saveGraphicsState];
@@ -26,9 +30,11 @@
 	[NSGraphicsContext restoreGraphicsState];
 	// The above code is from:
 	// http://www.cocoabuilder.com/archive/message/cocoa/2003/4/7/88648
+#if (MAC_OS_X_VERSION_MIN_REQUIRED < 1040)
 	// The remainder of that message applies to pre-Leopard only
 	// and is implemented in this class' -patchPreLeopardFocusRingDrawingForScrolling.
 	[self unlockFocus] ; // Balance lockFocus
+#endif
 }
 
 @end

@@ -8,7 +8,9 @@
 
 
 - (void)awakeFromNib {
+#if (MAC_OS_X_VERSION_MIN_REQUIRED < 1040)
 	[self patchPreLeopardFocusRingDrawingForScrolling] ;
+#endif
 	
 	// Safely invoke super
 	[self safelySendSuperSelector:_cmd
