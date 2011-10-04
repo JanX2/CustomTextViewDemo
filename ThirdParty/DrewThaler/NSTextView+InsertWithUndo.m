@@ -11,10 +11,9 @@
 
 @implementation NSTextView (InsertWithUndo)
 
-- (void)insertAttributedText:(NSAttributedString *)astring;
+- (void)replaceCharactersInRange:(NSRange)range withAttributedText:(NSAttributedString *)attributedString;
 {
-	NSRange range = [self selectedRange];
-	NSString *insertingText = [astring string];
+	NSString *insertingText = [attributedString string];
 	NSString *selectedText = [[self string] substringWithRange:range];
 	NSString *stringForDelegate = insertingText;
 	
@@ -27,10 +26,22 @@
 	if ([self shouldChangeTextInRange:range
 					replacementString:stringForDelegate]) {
 		[[self textStorage] replaceCharactersInRange:range
-								withAttributedString:astring];
-		[self setSelectedRange:NSMakeRange(range.location + [astring length], 0)];
+								withAttributedString:attributedString];
+		[self setSelectedRange:NSMakeRange(range.location + [attributedString length], 0)];
 		[self didChangeText];
-	}
+	}	
+}
+
+- (void)insertAttributedText:(NSAttributedString *)attributedString atIndex:(NSUInteger)index;
+{
+	NSRange range = NSMakeRange(index, 0);
+	[self replaceCharactersInRange:range withAttributedText:attributedString];
+}
+
+- (void)insertAttributedText:(NSAttributedString *)attributedString;
+{
+	NSRange range = [self selectedRange];
+	[self replaceCharactersInRange:range withAttributedText:attributedString];
 }
 
 - (void)insertText:(NSString *)string withAttributes:(NSDictionary *)attr;

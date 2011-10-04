@@ -8,6 +8,8 @@
 
 #import "CustomWindowController.h"
 
+#import "NSTextView+InsertWithUndo.h"
+
 
 #if !defined(MAX_OF_CONST_AND_DIFF)
 // Determines the maximum of two expressions:
@@ -92,12 +94,10 @@ NSAttributedString * attributedStringForURL(NSURL *aURL, NSDictionary **document
 		NSUInteger charIndex = [destination dragTargetCharIndex];
 
 		if (charIndex == NSNotFound) {
-			NSUInteger lastChar = MAX_OF_CONST_AND_DIFF(0, [textStorage length], 1);
-			[textStorage insertAttributedString:attributedString atIndex:lastChar];
+			charIndex = MAX_OF_CONST_AND_DIFF(0, [textStorage length], 1); // Last character in textStorage
 		}
-		else {
-			[textStorage insertAttributedString:attributedString atIndex:charIndex];
-		}
+
+		[destination insertAttributedText:attributedString atIndex:charIndex];
 
 		return YES;
 	}

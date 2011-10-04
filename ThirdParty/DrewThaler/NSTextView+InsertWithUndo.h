@@ -11,7 +11,9 @@
 
 @interface NSTextView (InsertWithUndo)
 
-- (void)insertAttributedText:(NSAttributedString *)astring;
+- (void)replaceCharactersInRange:(NSRange)range withAttributedText:(NSAttributedString *)attributedString;
+- (void)insertAttributedText:(NSAttributedString *)attributedString atIndex:(NSUInteger)index;
+- (void)insertAttributedText:(NSAttributedString *)attributedString;
 - (void)insertText:(NSString *)string withAttributes:(NSDictionary *)attr;
 
 @end
