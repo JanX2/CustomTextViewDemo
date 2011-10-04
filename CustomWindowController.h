@@ -13,6 +13,10 @@
 
 @interface CustomWindowController : NSWindowController <SSYDragDestinationTextViewDelegate> {
 	IBOutlet SSYDragDestinationTextView *	customTextView;
+
+	NSURL *		lastFileURL;
 }
+
+@property (nonatomic, retain) NSURL *lastFileURL;
 
 @end

@@ -30,6 +30,15 @@ NSAttributedString * attributedStringForURL(NSURL *aURL, NSDictionary **document
 
 @implementation CustomWindowController
 
+@synthesize lastFileURL;
+
+- (void)dealloc
+{
+	self.lastFileURL = nil;
+
+	[super dealloc];
+}
+
 - (void)awakeFromNib
 {
 	[customTextView unregisterDraggedTypes];
@@ -70,14 +79,14 @@ NSAttributedString * attributedStringForURL(NSURL *aURL, NSDictionary **document
 #endif
 	
 	if ([fileURLs count] == 1) {
-		NSURL *fileURL = [fileURLs objectAtIndex:0];
+		self.lastFileURL = [fileURLs objectAtIndex:0];
 		
 		NSDictionary *documentAttributes;
 		NSError *error;
-		NSAttributedString *attributedString = attributedStringForURL(fileURL, &documentAttributes, &error);
+		NSAttributedString *attributedString = attributedStringForURL(self.lastFileURL, &documentAttributes, &error);
 		
 		if (attributedString == nil) {
-			NSLog(@"URL:%@\n%@", fileURL, error);
+			NSLog(@"URL:%@\n%@", self.lastFileURL, error);
 			return NO;
 		}
 		
