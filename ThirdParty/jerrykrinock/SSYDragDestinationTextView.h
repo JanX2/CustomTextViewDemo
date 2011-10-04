@@ -33,6 +33,13 @@
 */
 - (void)setTabToNextKeyView:(BOOL)yn ;
 
+/*!
+ @brief    Returns the index of the character that was the target of the current drag operation
+ 
+ @details  When implementing -performDragOperation:destination: in the delegate, it can be helpful to know what character in the textStorage was the target of the current drag operation. This method returns the index of that character or NSNotFound if it cannot be determined.
+ */
+- (NSUInteger)dragTargetCharIndex ;
+
 @end
 
 

@@ -9,6 +9,15 @@
 #import "CustomWindowController.h"
 
 
+#if !defined(MAX_OF_CONST_AND_DIFF)
+// Determines the maximum of two expressions:
+// The first is a constant (first parameter) while the second expression is
+// the difference between the second and third parameter.  The way this is
+// calculated prevents integer overflow in the result of the difference.
+#define MAX_OF_CONST_AND_DIFF(A,B,C)  ((B) <= (C) ? (A) : (B) - (C) + (A))
+#endif
+
+
 NSAttributedString * attributedStringForURL(NSURL *aURL, NSDictionary **documentAttributes, NSError **outError) {
 	NSDictionary *documentOptions = [NSDictionary dictionary];
 	NSError *error;
@@ -80,29 +89,15 @@ NSAttributedString * attributedStringForURL(NSURL *aURL, NSDictionary **document
 		}
 		
 		NSTextStorage *textStorage = [destination textStorage];
-		NSTextContainer *textContainer = [destination textContainer];
-		NSLayoutManager *layoutManager = [destination layoutManager];
-		NSUInteger glyphIndex, charIndex;
-		NSRect glyphRect;
-		
-		NSPoint point = [destination convertPoint:[[destination window] mouseLocationOutsideOfEventStream] fromView:nil];
-		point.x -= [destination textContainerOrigin].x;
-		point.y -= [destination textContainerOrigin].y;
-		// Convert those coordinates to the nearest glyph index
-		glyphIndex = [layoutManager glyphIndexForPoint:point inTextContainer:textContainer];
-		
-		// Check to see whether the mouse actually lies over the glyph it is nearest to
-		glyphRect = [layoutManager boundingRectForGlyphRange:NSMakeRange(glyphIndex, 1) inTextContainer:textContainer];
-		if (NSPointInRect(point, glyphRect)) {
-			// Convert the glyph index to a character index
-			charIndex = [layoutManager characterIndexForGlyphAtIndex:glyphIndex];
+		NSUInteger charIndex = [destination dragTargetCharIndex];
 
-			[textStorage insertAttributedString:attributedString atIndex:charIndex];
+		if (charIndex == NSNotFound) {
+			NSUInteger lastChar = MAX_OF_CONST_AND_DIFF(0, [textStorage length], 1);
+			[textStorage insertAttributedString:attributedString atIndex:lastChar];
 		}
 		else {
-			[textStorage insertAttributedString:attributedString atIndex:0];
+			[textStorage insertAttributedString:attributedString atIndex:charIndex];
 		}
-
 
 		return YES;
 	}

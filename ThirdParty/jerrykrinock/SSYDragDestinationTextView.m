@@ -126,6 +126,33 @@
 	}
 }
 
+- (NSUInteger)dragTargetCharIndex {
+	NSTextContainer *textContainer = [self textContainer] ;
+	NSLayoutManager *layoutManager = [self layoutManager] ;
+	NSUInteger glyphIndex, charIndex ;
+	NSRect glyphRect ;
+	
+	NSPoint point = [self convertPoint:[[self window] mouseLocationOutsideOfEventStream] fromView:nil] ;
+	point.x -= [self textContainerOrigin].x ;
+	point.y -= [self textContainerOrigin].y ;
+	
+	// Convert those coordinates to the nearest glyph index
+	glyphIndex = [layoutManager glyphIndexForPoint:point inTextContainer:textContainer] ;
+	
+	// Check to see whether the mouse actually lies over the glyph it is nearest to
+	glyphRect = [layoutManager boundingRectForGlyphRange:NSMakeRange(glyphIndex, 1) inTextContainer:textContainer] ;
+	
+	if (NSPointInRect(point, glyphRect)) {
+		// Convert the glyph index to a character index
+		charIndex = [layoutManager characterIndexForGlyphAtIndex:glyphIndex] ;
+	}
+	else {
+		charIndex = NSNotFound ;
+	}
+	
+	return charIndex ;
+}
+
 @end
 
 /*
