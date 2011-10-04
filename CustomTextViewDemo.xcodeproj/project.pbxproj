@@ -13,6 +13,7 @@
 		3D5D5CD914386CC8009812B8 /* NSView+FocusRing.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D5D5CD514386CC8009812B8 /* NSView+FocusRing.m */; };
 		3D5D5CDA14386CC8009812B8 /* SSYDragDestinationTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D5D5CD714386CC8009812B8 /* SSYDragDestinationTextView.m */; };
 		3D5D5D1514387B16009812B8 /* CustomWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D5D5D1414387B16009812B8 /* CustomWindowController.m */; };
+		3D668DAE143B037E00232E32 /* NSTextView+InsertWithUndo.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D668DAD143B037E00232E32 /* NSTextView+InsertWithUndo.m */; };
 		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
 		8D11072D0486CEB800E47090 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
@@ -38,6 +39,8 @@
 		3D5D5D1314387B16009812B8 /* CustomWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomWindowController.h; sourceTree = "<group>"; };
 		3D5D5D1414387B16009812B8 /* CustomWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomWindowController.m; sourceTree = "<group>"; };
 		3D5D5D571438CBB2009812B8 /* SSYDragDestinationTextViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSYDragDestinationTextViewDelegate.h; sourceTree = "<group>"; };
+		3D668DAC143B037E00232E32 /* NSTextView+InsertWithUndo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSTextView+InsertWithUndo.h"; sourceTree = "<group>"; };
+		3D668DAD143B037E00232E32 /* NSTextView+InsertWithUndo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSTextView+InsertWithUndo.m"; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* CustomTextViewDemo-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "CustomTextViewDemo-Info.plist"; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* CustomTextViewDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CustomTextViewDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -135,6 +138,7 @@
 		3D5D5CD014386CC8009812B8 /* ThirdParty */ = {
 			isa = PBXGroup;
 			children = (
+				3D668DAB143B034200232E32 /* DrewThaler */,
 				3D5D5CD114386CC8009812B8 /* jerrykrinock */,
 			);
 			path = ThirdParty;
@@ -152,6 +156,15 @@
 				3D5D5D571438CBB2009812B8 /* SSYDragDestinationTextViewDelegate.h */,
 			);
 			path = jerrykrinock;
+			sourceTree = "<group>";
+		};
+		3D668DAB143B034200232E32 /* DrewThaler */ = {
+			isa = PBXGroup;
+			children = (
+				3D668DAC143B037E00232E32 /* NSTextView+InsertWithUndo.h */,
+				3D668DAD143B037E00232E32 /* NSTextView+InsertWithUndo.m */,
+			);
+			path = DrewThaler;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -222,6 +235,7 @@
 				3D5D5CD914386CC8009812B8 /* NSView+FocusRing.m in Sources */,
 				3D5D5CDA14386CC8009812B8 /* SSYDragDestinationTextView.m in Sources */,
 				3D5D5D1514387B16009812B8 /* CustomWindowController.m in Sources */,
+				3D668DAE143B037E00232E32 /* NSTextView+InsertWithUndo.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
