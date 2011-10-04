@@ -21,6 +21,11 @@
 
 @implementation NSTextView (EditWithUndo)
 
+- (void)setAttributedText:(NSAttributedString *)attributedString;
+{
+	[self replaceCharactersInRange:NSMakeRange(0, [[self textStorage] length]) withAttributedText:attributedString];
+}
+
 - (void)replaceCharactersInRange:(NSRange)range withAttributedText:(NSAttributedString *)attributedString;
 {
 	NSString *insertingText = [attributedString string];

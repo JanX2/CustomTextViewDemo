@@ -14,8 +14,10 @@
 	IBOutlet SSYDragDestinationTextView *	customTextView;
 
 	NSURL *		lastFileURL;
+	NSInteger	droppedFileProcessingType;
 }
 
 @property (nonatomic, retain) NSURL *lastFileURL;
+@property (nonatomic, assign) NSInteger droppedFileProcessingType;
 
 @end

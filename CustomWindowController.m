@@ -30,6 +30,17 @@ NSAttributedString * attributedStringForURL(NSURL *aURL, NSDictionary **document
 @implementation CustomWindowController
 
 @synthesize lastFileURL;
+@synthesize droppedFileProcessingType;
+
+- (id)init
+{
+	if (self = [super init]) {
+		lastFileURL = nil;
+		droppedFileProcessingType = 1;
+	}
+	
+	return self;
+}
 
 - (void)dealloc
 {
@@ -89,9 +100,17 @@ NSAttributedString * attributedStringForURL(NSURL *aURL, NSDictionary **document
 			return NO;
 		}
 		
-		NSUInteger charIndex = [destination dragTargetCharIndex];
-
-		[destination insertAttributedText:attributedString atIndex:charIndex checkIndex:YES];
+		if (droppedFileProcessingType == 1) { // Insert
+			NSUInteger charIndex = [destination dragTargetCharIndex];
+			
+			[destination insertAttributedText:attributedString atIndex:charIndex checkIndex:YES];
+		}
+		else if (droppedFileProcessingType == 2) { // Replace
+			[destination setAttributedText:attributedString];
+		}
+		else {
+			return NO;
+		}
 
 		return YES;
 	}
