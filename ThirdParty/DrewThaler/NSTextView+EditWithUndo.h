@@ -3,8 +3,9 @@
 //  CustomTextViewDemo
 //
 //  Created by Jan on 04.10.11.
-//  Copyright 2011 geheimwerk.de. All rights reserved.
 //
+
+// Based on DrewThaler’s post at http://www.cocoadev.com/index.pl?UndoSupportForNSTextStorage
 
 #import <Foundation/Foundation.h>
 
