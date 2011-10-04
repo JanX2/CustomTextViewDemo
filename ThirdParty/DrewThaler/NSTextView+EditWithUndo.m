@@ -9,6 +9,15 @@
 #import "NSTextView+EditWithUndo.h"
 
 
+#if !defined(MAX_OF_CONST_AND_DIFF)
+// Determines the maximum of two expressions:
+// The first is a constant (first parameter) while the second expression is
+// the difference between the second and third parameter.  The way this is
+// calculated prevents integer overflow in the result of the difference.
+#define MAX_OF_CONST_AND_DIFF(A,B,C)  ((B) <= (C) ? (A) : (B) - (C) + (A))
+#endif
+
+
 @implementation NSTextView (EditWithUndo)
 
 - (void)replaceCharactersInRange:(NSRange)range withAttributedText:(NSAttributedString *)attributedString;
@@ -36,6 +45,18 @@
 {
 	NSRange range = NSMakeRange(index, 0);
 	[self replaceCharactersInRange:range withAttributedText:attributedString];
+}
+
+- (void)insertAttributedText:(NSAttributedString *)attributedString atIndex:(NSUInteger)index checkIndex:(BOOL)checkIndex;
+{
+	NSTextStorage *textStorage = [self textStorage];
+	NSUInteger textLength = [textStorage length];
+
+	if (checkIndex && (index == NSNotFound || !(index < textLength))) {
+		index = MAX_OF_CONST_AND_DIFF(0, textLength, 1); // Last character in textStorage
+	}
+	
+	[self insertAttributedText:attributedString atIndex:index];
 }
 
 - (void)insertAttributedText:(NSAttributedString *)attributedString;

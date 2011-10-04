@@ -11,15 +11,6 @@
 #import "NSTextView+EditWithUndo.h"
 
 
-#if !defined(MAX_OF_CONST_AND_DIFF)
-// Determines the maximum of two expressions:
-// The first is a constant (first parameter) while the second expression is
-// the difference between the second and third parameter.  The way this is
-// calculated prevents integer overflow in the result of the difference.
-#define MAX_OF_CONST_AND_DIFF(A,B,C)  ((B) <= (C) ? (A) : (B) - (C) + (A))
-#endif
-
-
 NSAttributedString * attributedStringForURL(NSURL *aURL, NSDictionary **documentAttributes, NSError **outError) {
 	NSDictionary *documentOptions = [NSDictionary dictionary];
 	NSError *error;
@@ -90,14 +81,9 @@ NSAttributedString * attributedStringForURL(NSURL *aURL, NSDictionary **document
 			return NO;
 		}
 		
-		NSTextStorage *textStorage = [destination textStorage];
 		NSUInteger charIndex = [destination dragTargetCharIndex];
 
-		if (charIndex == NSNotFound) {
-			charIndex = MAX_OF_CONST_AND_DIFF(0, [textStorage length], 1); // Last character in textStorage
-		}
-
-		[destination insertAttributedText:attributedString atIndex:charIndex];
+		[destination insertAttributedText:attributedString atIndex:charIndex checkIndex:YES];
 
 		return YES;
 	}
