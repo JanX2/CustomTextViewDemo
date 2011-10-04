@@ -1,5 +1,5 @@
 //
-//  NSTextView+InsertWithUndo.h
+//  NSTextView+EditWithUndo.h
 //  CustomTextViewDemo
 //
 //  Created by Jan on 04.10.11.
@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 
 
-@interface NSTextView (InsertWithUndo)
+@interface NSTextView (EditWithUndo)
 
 - (void)replaceCharactersInRange:(NSRange)range withAttributedText:(NSAttributedString *)attributedString;
 - (void)insertAttributedText:(NSAttributedString *)attributedString atIndex:(NSUInteger)index;

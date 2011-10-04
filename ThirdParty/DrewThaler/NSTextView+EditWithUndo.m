@@ -1,15 +1,15 @@
 //
-//  NSTextView+InsertWithUndo.m
+//  NSTextView+EditWithUndo.m
 //  CustomTextViewDemo
 //
 //  Created by Jan on 04.10.11.
 //  Copyright 2011 geheimwerk.de. All rights reserved.
 //
 
-#import "NSTextView+InsertWithUndo.h"
+#import "NSTextView+EditWithUndo.h"
 
 
-@implementation NSTextView (InsertWithUndo)
+@implementation NSTextView (EditWithUndo)
 
 - (void)replaceCharactersInRange:(NSRange)range withAttributedText:(NSAttributedString *)attributedString;
 {

@@ -8,7 +8,7 @@
 
 #import "CustomWindowController.h"
 
-#import "NSTextView+InsertWithUndo.h"
+#import "NSTextView+EditWithUndo.h"
 
 
 #if !defined(MAX_OF_CONST_AND_DIFF)
