@@ -93,8 +93,8 @@
 	return answer ;
 } 
 
-// Forward the drop to the delegate, or else, its window's delegate
-// If they can handle it answer == YES and we return YES, otherwise we pass it to super
+// If they can potentially handle it, we forward the drop to the delegate, or else, its window's delegate
+// We pass it to super if they can’t handle the drag.
 - (BOOL)performDragOperation:(id <NSDraggingInfo>)sender {
 	NSPasteboard *pasteboard = [sender draggingPasteboard];
 	NSString *type = [pasteboard availableTypeFromArray:[self acceptableDragTypes]];
