@@ -20,10 +20,13 @@
 
 @interface SSYDragDestinationTextView : NSTextView {
 	BOOL _isInDrag ;
+#if ENABLE_TAB_TO_NEXT_KEY_VIEW
 	BOOL _tabToNextKeyView ;
+#endif
 }
 
 
+#if ENABLE_TAB_TO_NEXT_KEY_VIEW
 /*!
  @brief    Sets the ivar _tabToNextKeyView
 
@@ -32,6 +35,7 @@
  @param    YES  to tab to the next key view, NO for the default NSTextView behavior.
 */
 - (void)setTabToNextKeyView:(BOOL)yn ;
+#endif
 
 /*!
  @brief    Returns the index of the character that was the target of the current drag operation

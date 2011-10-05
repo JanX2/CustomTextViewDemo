@@ -17,11 +17,12 @@
 						arguments:nil] ;
 }
 
+#if ENABLE_TAB_TO_NEXT_KEY_VIEW
 - (void)setTabToNextKeyView:(BOOL)yn {
 	_tabToNextKeyView = yn ;
 }
 
-/*- (void)keyDown:(NSEvent*)event {
+- (void)keyDown:(NSEvent*)event {
 	NSString *s = [event charactersIgnoringModifiers] ;
 	unichar keyChar = 0 ;
 	if ([s length] == 1) {
@@ -44,7 +45,7 @@
 		}
 	}
 }
-*/
+#endif
 
 - (NSDragOperation)draggingEntered:(id <NSDraggingInfo>)sender {
 	NSDragOperation answer = NSDragOperationNone ;
