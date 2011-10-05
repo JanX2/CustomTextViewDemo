@@ -96,7 +96,19 @@ NSAttributedString * attributedStringForURL(NSURL *aURL, NSDictionary **document
 		NSAttributedString *attributedString = attributedStringForURL(self.lastFileURL, &documentAttributes, &error);
 		
 		if (attributedString == nil) {
-			NSLog(@"URL:%@\n%@", self.lastFileURL, error);
+			NSWindow *myWindow = [self window];
+			
+			if ((myWindow != nil) && [myWindow isVisible]) {
+				[self presentError:error 
+					modalForWindow:myWindow 
+						  delegate:self 
+				didPresentSelector:@selector(didPresentErrorWithRecovery:contextInfo:) 
+					   contextInfo:NULL];
+			}
+			else {
+				[self presentError:error];
+			}
+
 			return NO;
 		}
 		
@@ -126,6 +138,12 @@ NSAttributedString * attributedStringForURL(NSURL *aURL, NSDictionary **document
 	}
 	
 	return NO;
+}
+
+- (void)didPresentErrorWithRecovery:(BOOL)didRecover contextInfo:(void  *)contextInfo
+{
+	// We ignore errors recovery for now.
+	return;
 }
 
 @end
