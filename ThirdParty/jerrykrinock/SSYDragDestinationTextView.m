@@ -209,14 +209,14 @@
 		NSMutableString* textFromMessages = [[NSMutableString alloc] init] ;
 		
 		if(result) {
-			int k;
+			NSInteger k;
 			NSString *mailMessage;
 			
 			NSLog(@"Hullo!  2 Getting result from helper") ;
 			result = [[CIPAppleScriptHelper sharedHelper] callInResource: resourcePath
 																  script: @"getSelectedMailBodies"];
 			NSLog(@"Hullo!  2 result = %@", result) ;
-			int numberOfItems = [result numberOfItems];
+			NSInteger numberOfItems = [result numberOfItems];
 			NSLog(@"Hullo!  numberOfItems = %i", numberOfItems) ;
 			for(k=1; k <= numberOfItems; k++) {
 				mailMessage = [[result descriptorAtIndex: k] stringValue] ;
