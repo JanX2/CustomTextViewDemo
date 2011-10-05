@@ -50,7 +50,7 @@
 - (NSDragOperation)draggingEntered:(id <NSDraggingInfo>)sender {
 	NSDragOperation answer = NSDragOperationNone ;
 	NSPasteboard* pasteboard = [sender draggingPasteboard] ;
-	NSString *anAcceptableType = [pasteboard availableTypeFromArray:[self registeredDraggedTypes]];	
+	NSString* anAcceptableType = [pasteboard availableTypeFromArray:[self registeredDraggedTypes]];	
 	
 	if (anAcceptableType != nil) {
 		// Don't be hidden!!!...
@@ -164,25 +164,8 @@
 
 @end
 
-/*
-
-	  
-	  NSPasteboard *pb = [sender draggingPasteboard];
- NSString *value;
- NSString *type;
- type = [pb availableTypeFromArray:[NSArray arrayWithObject:NSStringPboardType]];
- if (type) {
- value = [pb stringForType:NSStringPboardType];
- id target = [self myDropTarget];
- SEL action = [self myDropAction];
- [target performSelector:action withObject:value];
- return YES;
- }
- return NO;
- }
-  
- 
- - (BOOL)performDragOperation:(id <NSDraggingInfo>)info {
+#if 0 
+- (BOOL)performDragOperation:(id <NSDraggingInfo>)info {
 	NSPasteboard* pasteboard = [info draggingPasteboard] ;
 	
 	NSArray* acceptableTypes ;
@@ -198,55 +181,56 @@
 	
 	if ([bestType isEqualToString:@"MV Super-secret message transfer pasteboard type"]) {
 		NSLog(@"Tried drag of Apple Mail message: not supported yet.") ;
-		//		// Three reasons why this code is commented out:
-		//		// 1.  Import takes 30 seconds or more.
-		//		// 2.  Import comes in html, as shown below.  Must filter to plain text somehow:
-		//		// this:</DIV><DIV><BR></DIV><DIV>Licensee Name:</DIV><DIV>bH New Sale =
-		//		// 150953</DIV><DIV><BR></DIV><DIV>Serial =
-		//		// Number:</DIV><DIV>CbN34wJoOVX7Jgva</DIV><DIV><BR></DIV><DIV>Bookmarksman =		
-		//		// Neither of problems 1 or 2 are fixed by uncommenting "theLock" in
-		//		// CIPAppleScriptHelper.m
-		//		// 3.  According to Apple Documentation, should not use [self class] in the
-		//		// next line but should use [MyApp class] instead.  But MyApp is not
-		//		// declared anywhere.  Maybe this could be fixed by using -classNamed:@"MyApp".
-		//		// But who do you send that instance message to?
-		//		NSBundle *bundle = [NSBundle bundleForClass:[self class]];
-		//		NSLog(@"Hullo!  bundlePath = %@", [bundle bundlePath]) ;
-		//		NSString *resourcePath = [bundle pathForResource: @"MailHelper"
-		//												  ofType: @"applescript"];
-		//		
-		//		NSLog(@"Hullo!  resourcePath = %@", resourcePath) ;
-		//		NSLog(@"Hullo!  1 Getting result from helper") ;
-		//		NSAppleEventDescriptor *result =
-		//			[[CIPAppleScriptHelper sharedHelper] callInResource: resourcePath
-		//														 script: @"getSelectedMailCount"] ;
-		//		
-		//		NSLog(@"Hullo!  1 result = %@", result) ;
-		//		NSMutableString* textFromMessages = [[NSMutableString alloc] init] ;
-		//		
-		//		if(result) {
-		//			int k;
-		//			NSString *mailMessage;
-		//			
-		//			NSLog(@"Hullo!  2 Getting result from helper") ;
-		//			result = [[CIPAppleScriptHelper sharedHelper] callInResource: resourcePath
-		//																  script: @"getSelectedMailBodies"];
-		//			NSLog(@"Hullo!  2 result = %@", result) ;
-		//			int numberOfItems = [result numberOfItems];
-		//			NSLog(@"Hullo!  numberOfItems = %i", numberOfItems) ;
-		//			for(k=1; k <= numberOfItems; k++) {
-		//				mailMessage = [[result descriptorAtIndex: k] stringValue] ;
-		//				NSLog(@"Hullo!  mailMessage = %@", mailMessage) ;
-		//				[textFromMessages appendString:mailMessage] ;
-		//			}		
-		//		}
-		//		
-		//		if ([textFromMessages length] > 0) {
-		//			object = [textFromMessages copy] ;
-		//		}
-		//		
-		//		[textFromMessages release] ;
+#if 0
+		// Three reasons why this code is commented out:
+		// 1.  Import takes 30 seconds or more.
+		// 2.  Import comes in html, as shown below.  Must filter to plain text somehow:
+		// this:</DIV><DIV><BR></DIV><DIV>Licensee Name:</DIV><DIV>bH New Sale =
+		// 150953</DIV><DIV><BR></DIV><DIV>Serial =
+		// Number:</DIV><DIV>CbN34wJoOVX7Jgva</DIV><DIV><BR></DIV><DIV>Bookmarksman =		
+		// Neither of problems 1 or 2 are fixed by uncommenting "theLock" in
+		// CIPAppleScriptHelper.m
+		// 3.  According to Apple Documentation, should not use [self class] in the
+		// next line but should use [MyApp class] instead.  But MyApp is not
+		// declared anywhere.  Maybe this could be fixed by using -classNamed:@"MyApp".
+		// But who do you send that instance message to?
+		NSBundle *bundle = [NSBundle bundleForClass:[self class]];
+		NSLog(@"Hullo!  bundlePath = %@", [bundle bundlePath]) ;
+		NSString *resourcePath = [bundle pathForResource: @"MailHelper"
+												  ofType: @"applescript"];
 		
+		NSLog(@"Hullo!  resourcePath = %@", resourcePath) ;
+		NSLog(@"Hullo!  1 Getting result from helper") ;
+		NSAppleEventDescriptor *result =
+			[[CIPAppleScriptHelper sharedHelper] callInResource: resourcePath
+														 script: @"getSelectedMailCount"] ;
+		
+		NSLog(@"Hullo!  1 result = %@", result) ;
+		NSMutableString* textFromMessages = [[NSMutableString alloc] init] ;
+		
+		if(result) {
+			int k;
+			NSString *mailMessage;
+			
+			NSLog(@"Hullo!  2 Getting result from helper") ;
+			result = [[CIPAppleScriptHelper sharedHelper] callInResource: resourcePath
+																  script: @"getSelectedMailBodies"];
+			NSLog(@"Hullo!  2 result = %@", result) ;
+			int numberOfItems = [result numberOfItems];
+			NSLog(@"Hullo!  numberOfItems = %i", numberOfItems) ;
+			for(k=1; k <= numberOfItems; k++) {
+				mailMessage = [[result descriptorAtIndex: k] stringValue] ;
+				NSLog(@"Hullo!  mailMessage = %@", mailMessage) ;
+				[textFromMessages appendString:mailMessage] ;
+			}		
+		}
+		
+		if ([textFromMessages length] > 0) {
+			object = [textFromMessages copy] ;
+		}
+		
+		[textFromMessages release] ;
+#endif
 	}
 	
 	if (!object) {
@@ -266,6 +250,4 @@
 	
 	return NO ;
 }
-*/
-
-
+#endif
