@@ -96,20 +96,24 @@
 // Forward the drop to the delegate, or else, its window's delegate
 // If they can handle it answer == YES and we return YES, otherwise we pass it to super
 - (BOOL)performDragOperation:(id <NSDraggingInfo>)sender {
-    BOOL answer = NO ;
-	if ([self respondsToSelector:@selector(delegate)]) {
-		answer = [(id <SSYDragDestinationTextViewDelegate>)[self delegate] 
-				  performDragOperation:sender
-				  destination:self] ;
-	}
-	else if ([[[self window] delegate] respondsToSelector:@selector(performDragOperation:destination:)]) {
-		answer = [(id <SSYDragDestinationTextViewDelegate>)[[self window] delegate] 
-				  performDragOperation:sender
-				  destination:self] ;
-	}
-	
-	if (answer) {
-		return YES ;
+	NSPasteboard *pasteboard = [sender draggingPasteboard];
+	NSString *type = [pasteboard availableTypeFromArray:[self acceptableDragTypes]];
+
+	if (type && [type isEqualToString:NSFilenamesPboardType]) {
+		BOOL success = NO ;
+		
+		if ([self respondsToSelector:@selector(delegate)]) {
+			success = [(id <SSYDragDestinationTextViewDelegate>)[self delegate] 
+					   performDragOperation:sender
+					   destination:self] ;
+		}
+		else if ([[[self window] delegate] respondsToSelector:@selector(performDragOperation:destination:)]) {
+			success = [(id <SSYDragDestinationTextViewDelegate>)[[self window] delegate] 
+					   performDragOperation:sender
+					   destination:self] ;
+		}
+		
+		return success ;
 	}
 	else {
 		return [super performDragOperation:sender] ;
