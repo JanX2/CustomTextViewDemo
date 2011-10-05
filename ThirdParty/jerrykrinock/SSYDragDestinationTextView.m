@@ -78,9 +78,11 @@
 - (BOOL)prepareForDragOperation:(id <NSDraggingInfo>)sender {
 	BOOL answer = NO ;
 	
+#if (MAC_OS_X_VERSION_MIN_REQUIRED < 1040)
 	// Panther does not respond to -registeredDraggedTypes.
 	// We simply do not support dragging in Panther.
 	if ([self respondsToSelector:@selector(registeredDraggedTypes)]) {
+#endif
 		NSPasteboard* pasteboard = [sender draggingPasteboard] ;
 		NSString* anAcceptableType = [pasteboard availableTypeFromArray:[self registeredDraggedTypes]] ;
 		if (anAcceptableType != nil) {
@@ -89,7 +91,9 @@
 			[self setNeedsDisplay:YES] ;
 			answer = YES ;
 		}
+#if (MAC_OS_X_VERSION_MIN_REQUIRED < 1040)
 	}
+#endif
 	
 	return answer ;
 } 
