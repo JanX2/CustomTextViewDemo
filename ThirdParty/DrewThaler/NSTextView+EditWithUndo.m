@@ -12,9 +12,25 @@
 
 @implementation NSTextView (EditWithUndo)
 
+- (void)setSelectedRangeWithUndo:(NSRange)range;
+{
+	[self setSelectedRange:range];
+	[[self.undoManager prepareWithInvocationTarget:self] setSelectedRangeWithUndo:range];
+}
+
 - (void)setAttributedText:(NSAttributedString *)attributedString;
 {
-	[self replaceCharactersInRange:NSMakeRange(0, [[self textStorage] length]) withAttributedText:attributedString];
+	[[self.undoManager prepareWithInvocationTarget:self] setSelectedRangeWithUndo:self.selectedRange];
+
+	if ([self shouldChangeTextInRange:NSMakeRange(0, [[self textStorage] length])
+					replacementString:[attributedString string]]) {
+		
+		[[self textStorage] setAttributedString:attributedString];
+		
+		[self didChangeText];
+
+		[self setSelectedRangeWithUndo:NSMakeRange(0, 0)];
+	}
 }
 
 - (void)replaceCharactersInRange:(NSRange)range withAttributedText:(NSAttributedString *)attributedString;
@@ -28,13 +44,18 @@
 		stringForDelegate = nil;
 	}
 	
+	[[self.undoManager prepareWithInvocationTarget:self] setSelectedRangeWithUndo:self.selectedRange];
+
 	// Call delegate methods to force undo recording
 	if ([self shouldChangeTextInRange:range
 					replacementString:stringForDelegate]) {
+
 		[[self textStorage] replaceCharactersInRange:range
 								withAttributedString:attributedString];
-		[self setSelectedRange:NSMakeRange(range.location + [attributedString length], 0)];
+
 		[self didChangeText];
+
+		[self setSelectedRangeWithUndo:NSMakeRange(range.location + [attributedString length], 0)];
 	}	
 }
 

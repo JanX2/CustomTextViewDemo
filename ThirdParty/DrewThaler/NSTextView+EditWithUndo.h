@@ -12,6 +12,8 @@
 
 @interface NSTextView (EditWithUndo)
 
+- (void)setSelectedRangeWithUndo:(NSRange)range;
+
 - (void)setAttributedText:(NSAttributedString *)attributedString;
 - (void)replaceCharactersInRange:(NSRange)range withAttributedText:(NSAttributedString *)attributedString;
 - (void)insertAttributedText:(NSAttributedString *)attributedString atIndex:(NSUInteger)index;
