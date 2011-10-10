@@ -20,6 +20,7 @@
 
 @interface SSYDragDestinationTextView : NSTextView {
 	BOOL _isInDrag ;
+	NSRange _preDragSelectedRange;
 #if ENABLE_TAB_TO_NEXT_KEY_VIEW
 	BOOL _tabToNextKeyView ;
 #endif

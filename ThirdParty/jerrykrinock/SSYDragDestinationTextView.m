@@ -60,6 +60,7 @@
 		answer = NSDragOperationCopy ; // Accept data as a copy operation
 		
 		_isInDrag = YES ;
+		_preDragSelectedRange = self.selectedRange;
 		[self selectAll:self] ;
 		[self setNeedsDisplay:YES] ;
 	}
@@ -70,7 +71,7 @@
 // Called whenever a drag exits our drop zone
 - (void)draggingExited:(id <NSDraggingInfo>)sender {
 	_isInDrag = NO ;
-	[self setSelectedRange:NSMakeRange(0,0)] ;
+	[self setSelectedRange:_preDragSelectedRange] ;
 	[self setNeedsDisplay:YES] ;
 }
 
