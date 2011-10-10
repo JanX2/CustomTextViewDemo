@@ -18,7 +18,7 @@
 	[[self.undoManager prepareWithInvocationTarget:self] setSelectedRangeWithUndo:range];
 }
 
-- (void)setAttributedText:(NSAttributedString *)attributedString;
+- (BOOL)setAttributedText:(NSAttributedString *)attributedString;
 {
 	[[self.undoManager prepareWithInvocationTarget:self] setSelectedRangeWithUndo:self.selectedRange];
 
@@ -30,10 +30,15 @@
 		[self didChangeText];
 
 		[self setSelectedRangeWithUndo:NSMakeRange(0, 0)];
+		
+		return YES;
+	}
+	else {
+		return NO;
 	}
 }
 
-- (void)replaceCharactersInRange:(NSRange)range withAttributedText:(NSAttributedString *)attributedString;
+- (BOOL)replaceCharactersInRange:(NSRange)range withAttributedText:(NSAttributedString *)attributedString;
 {
 	NSString *insertingText = [attributedString string];
 	NSString *selectedText = [[self string] substringWithRange:range];
@@ -56,16 +61,21 @@
 		[self didChangeText];
 
 		[self setSelectedRangeWithUndo:NSMakeRange(range.location + [attributedString length], 0)];
-	}	
+		
+		return YES;
+	}
+	else {
+		return NO;
+	}
 }
 
-- (void)insertAttributedText:(NSAttributedString *)attributedString atIndex:(NSUInteger)index;
+- (BOOL)insertAttributedText:(NSAttributedString *)attributedString atIndex:(NSUInteger)index;
 {
 	NSRange range = NSMakeRange(index, 0);
-	[self replaceCharactersInRange:range withAttributedText:attributedString];
+	return [self replaceCharactersInRange:range withAttributedText:attributedString];
 }
 
-- (void)insertAttributedText:(NSAttributedString *)attributedString atIndex:(NSUInteger)index checkIndex:(BOOL)checkIndex;
+- (BOOL)insertAttributedText:(NSAttributedString *)attributedString atIndex:(NSUInteger)index checkIndex:(BOOL)checkIndex;
 {
 	NSTextStorage *textStorage = [self textStorage];
 	NSUInteger textLength = [textStorage length];
@@ -74,22 +84,25 @@
 		index = textLength; // AFTER the last character in textStorage
 	}
 	
-	[self insertAttributedText:attributedString atIndex:index];
+	return [self insertAttributedText:attributedString atIndex:index];
 }
 
-- (void)insertAttributedText:(NSAttributedString *)attributedString;
+- (BOOL)insertAttributedText:(NSAttributedString *)attributedString;
 {
 	NSRange range = [self selectedRange];
-	[self replaceCharactersInRange:range withAttributedText:attributedString];
+	return [self replaceCharactersInRange:range withAttributedText:attributedString];
 }
 
-- (void)insertText:(NSString *)string withAttributes:(NSDictionary *)attr;
+- (BOOL)insertText:(NSString *)string withAttributes:(NSDictionary *)attr;
 {
+	BOOL success = NO;
 	NSAttributedString *astring =
 	[[NSAttributedString alloc] initWithString:string
 									attributes:attr];
-	[self insertAttributedText:astring];
+	success = [self insertAttributedText:astring];
 	[astring release];
+	
+	return success;
 }
 
 @end

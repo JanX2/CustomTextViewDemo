@@ -14,11 +14,11 @@
 
 - (void)setSelectedRangeWithUndo:(NSRange)range;
 
-- (void)setAttributedText:(NSAttributedString *)attributedString;
-- (void)replaceCharactersInRange:(NSRange)range withAttributedText:(NSAttributedString *)attributedString;
-- (void)insertAttributedText:(NSAttributedString *)attributedString atIndex:(NSUInteger)index;
-- (void)insertAttributedText:(NSAttributedString *)attributedString atIndex:(NSUInteger)index checkIndex:(BOOL)checkIndex;
-- (void)insertAttributedText:(NSAttributedString *)attributedString;
-- (void)insertText:(NSString *)string withAttributes:(NSDictionary *)attr;
+- (BOOL)setAttributedText:(NSAttributedString *)attributedString;
+- (BOOL)replaceCharactersInRange:(NSRange)range withAttributedText:(NSAttributedString *)attributedString;
+- (BOOL)insertAttributedText:(NSAttributedString *)attributedString atIndex:(NSUInteger)index;
+- (BOOL)insertAttributedText:(NSAttributedString *)attributedString atIndex:(NSUInteger)index checkIndex:(BOOL)checkIndex;
+- (BOOL)insertAttributedText:(NSAttributedString *)attributedString;
+- (BOOL)insertText:(NSString *)string withAttributes:(NSDictionary *)attr;
 
 @end
