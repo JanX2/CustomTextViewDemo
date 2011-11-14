@@ -142,7 +142,7 @@ NSAttributedString * attributedStringForURL(NSURL *aURL, NSDictionary **document
 
 - (void)didPresentErrorWithRecovery:(BOOL)didRecover contextInfo:(void  *)contextInfo
 {
-	// We ignore errors recovery for now.
+	// We ignore error recovery for now.
 	return;
 }
 
