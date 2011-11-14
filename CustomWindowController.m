@@ -36,7 +36,7 @@ NSAttributedString * attributedStringForURL(NSURL *aURL, NSDictionary **document
 {
 	if (self = [super init]) {
 		lastFileURL = nil;
-		droppedFileProcessingType = 1;
+		droppedFileProcessingType = 2;
 	}
 	
 	return self;
