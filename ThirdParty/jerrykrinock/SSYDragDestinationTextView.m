@@ -1,21 +1,10 @@
 #import "SSYDragDestinationTextView.h"
-#import "NSObject+SuperUtils.h"
 #import "NSView+FocusRing.h"
 #import "SSYDragDestinationTextViewDelegate.h"
 
 
 @implementation SSYDragDestinationTextView : NSTextView
 
-
-- (void)awakeFromNib {
-#if (MAC_OS_X_VERSION_MIN_REQUIRED < 1040)
-	[self patchPreLeopardFocusRingDrawingForScrolling] ;
-#endif
-	
-	// Safely invoke super
-	[self safelySendSuperSelector:_cmd
-						arguments:nil] ;
-}
 
 #if ENABLE_TAB_TO_NEXT_KEY_VIEW
 - (void)setTabToNextKeyView:(BOOL)yn {
@@ -79,22 +68,14 @@
 - (BOOL)prepareForDragOperation:(id <NSDraggingInfo>)sender {
 	BOOL answer = NO ;
 	
-#if (MAC_OS_X_VERSION_MIN_REQUIRED < 1040)
-	// Panther does not respond to -registeredDraggedTypes.
-	// We simply do not support dragging in Panther.
-	if ([self respondsToSelector:@selector(registeredDraggedTypes)]) {
-#endif
-		NSPasteboard* pasteboard = [sender draggingPasteboard] ;
-		NSString* anAcceptableType = [pasteboard availableTypeFromArray:[self registeredDraggedTypes]] ;
-		if (anAcceptableType != nil) {
-			_isInDrag = NO ;
-			[self setSelectedRange:NSMakeRange(0,0)] ;
-			[self setNeedsDisplay:YES] ;
-			answer = YES ;
-		}
-#if (MAC_OS_X_VERSION_MIN_REQUIRED < 1040)
+	NSPasteboard* pasteboard = [sender draggingPasteboard] ;
+	NSString* anAcceptableType = [pasteboard availableTypeFromArray:[self registeredDraggedTypes]] ;
+	if (anAcceptableType != nil) {
+		_isInDrag = NO ;
+		[self setSelectedRange:NSMakeRange(0,0)] ;
+		[self setNeedsDisplay:YES] ;
+		answer = YES ;
 	}
-#endif
 	
 	return answer ;
 } 

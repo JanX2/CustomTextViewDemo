@@ -2,10 +2,6 @@
 
 @interface NSView (FocusRing)
 
-#if (MAC_OS_X_VERSION_MIN_REQUIRED < 1040)
-- (void)patchPreLeopardFocusRingDrawingForScrolling ;
-#endif
-
 - (void)drawFocusRing ;
 // Although the above method invokes -lockFocus, and thus will work if
 // invoked while not within -drawRect, it is recommended to invoke this
