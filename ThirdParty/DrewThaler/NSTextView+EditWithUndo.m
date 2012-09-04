@@ -9,14 +9,9 @@
 
 #import "NSTextView+EditWithUndo.h"
 
+#import "NSTextView+EditSelectionWithUndo.h"
 
 @implementation NSTextView (EditWithUndo)
-
-- (void)setSelectedRangeWithUndo:(NSRange)range;
-{
-	[self setSelectedRange:range];
-	[[self.undoManager prepareWithInvocationTarget:self] setSelectedRangeWithUndo:range];
-}
 
 - (BOOL)setAttributedText:(NSAttributedString *)attributedString;
 {

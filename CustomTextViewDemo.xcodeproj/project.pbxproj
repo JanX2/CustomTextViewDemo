@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		1DDD58160DA1D0A300B32029 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1DDD58140DA1D0A300B32029 /* MainMenu.xib */; };
 		256AC3DA0F4B6AC300CF3369 /* CustomTextViewDemoAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 256AC3D90F4B6AC300CF3369 /* CustomTextViewDemoAppDelegate.m */; };
+		3D4D0FDF15F602C000E4C986 /* NSTextView+EditSelectionWithUndo.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D4D0FDC15F602C000E4C986 /* NSTextView+EditSelectionWithUndo.m */; };
+		3D4D0FE015F602C000E4C986 /* NSTextView+EditPlainTextWithUndo.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D4D0FDD15F602C000E4C986 /* NSTextView+EditPlainTextWithUndo.m */; };
 		3D5D5CD914386CC8009812B8 /* NSView+FocusRing.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D5D5CD514386CC8009812B8 /* NSView+FocusRing.m */; };
 		3D5D5CDA14386CC8009812B8 /* SSYDragDestinationTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D5D5CD714386CC8009812B8 /* SSYDragDestinationTextView.m */; };
 		3D5D5D1514387B16009812B8 /* CustomWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D5D5D1414387B16009812B8 /* CustomWindowController.m */; };
@@ -29,6 +31,10 @@
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		29B97324FDCFA39411CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
 		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
+		3D4D0FDB15F602C000E4C986 /* NSTextView+EditSelectionWithUndo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSTextView+EditSelectionWithUndo.h"; sourceTree = "<group>"; };
+		3D4D0FDC15F602C000E4C986 /* NSTextView+EditSelectionWithUndo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSTextView+EditSelectionWithUndo.m"; sourceTree = "<group>"; };
+		3D4D0FDD15F602C000E4C986 /* NSTextView+EditPlainTextWithUndo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSTextView+EditPlainTextWithUndo.m"; sourceTree = "<group>"; };
+		3D4D0FDE15F602C000E4C986 /* NSTextView+EditPlainTextWithUndo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSTextView+EditPlainTextWithUndo.h"; sourceTree = "<group>"; };
 		3D5D5CD414386CC8009812B8 /* NSView+FocusRing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSView+FocusRing.h"; sourceTree = "<group>"; };
 		3D5D5CD514386CC8009812B8 /* NSView+FocusRing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSView+FocusRing.m"; sourceTree = "<group>"; };
 		3D5D5CD614386CC8009812B8 /* SSYDragDestinationTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSYDragDestinationTextView.h; sourceTree = "<group>"; };
@@ -158,6 +164,10 @@
 			children = (
 				3D668DAC143B037E00232E32 /* NSTextView+EditWithUndo.h */,
 				3D668DAD143B037E00232E32 /* NSTextView+EditWithUndo.m */,
+				3D4D0FDB15F602C000E4C986 /* NSTextView+EditSelectionWithUndo.h */,
+				3D4D0FDC15F602C000E4C986 /* NSTextView+EditSelectionWithUndo.m */,
+				3D4D0FDD15F602C000E4C986 /* NSTextView+EditPlainTextWithUndo.m */,
+				3D4D0FDE15F602C000E4C986 /* NSTextView+EditPlainTextWithUndo.h */,
 			);
 			path = DrewThaler;
 			sourceTree = "<group>";
@@ -230,6 +240,8 @@
 				3D5D5CDA14386CC8009812B8 /* SSYDragDestinationTextView.m in Sources */,
 				3D5D5D1514387B16009812B8 /* CustomWindowController.m in Sources */,
 				3D668DAE143B037E00232E32 /* NSTextView+EditWithUndo.m in Sources */,
+				3D4D0FDF15F602C000E4C986 /* NSTextView+EditSelectionWithUndo.m in Sources */,
+				3D4D0FE015F602C000E4C986 /* NSTextView+EditPlainTextWithUndo.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
