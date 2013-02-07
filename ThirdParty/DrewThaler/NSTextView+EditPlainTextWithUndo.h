@@ -8,6 +8,7 @@
 // Based on DrewThaler’s post at http://www.cocoadev.com/index.pl?UndoSupportForNSTextStorage
 
 #import <Foundation/Foundation.h>
+#import <AppKit/AppKit.h>
 
 
 @interface NSTextView (EditPlainTextWithUndo)

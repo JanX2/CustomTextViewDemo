@@ -1,3 +1,4 @@
+#import "NSView+FocusRing.h"
 
 @implementation NSView (FocusRing)
 
