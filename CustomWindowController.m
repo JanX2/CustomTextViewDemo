@@ -19,11 +19,11 @@ NSAttributedString * attributedStringForURL(NSURL *aURL, NSDictionary **document
 																			 error:&error];
 	if (!attributedString) {
 		if (outError) {
-			*outError = [[error retain] autorelease];
+			*outError = error;
 		}
 	}
 	
-	return [attributedString autorelease];
+	return attributedString;
 }
 
 
@@ -39,12 +39,6 @@ NSAttributedString * attributedStringForURL(NSURL *aURL, NSDictionary **document
 	return self;
 }
 
-- (void)dealloc
-{
-	self.lastFileURL = nil;
-
-	[super dealloc];
-}
 
 - (void)awakeFromNib
 {

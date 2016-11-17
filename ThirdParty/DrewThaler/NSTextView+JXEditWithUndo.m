@@ -95,7 +95,6 @@
 	[[NSAttributedString alloc] initWithString:string
 									attributes:attr];
 	success = [self insertTextJX:astring];
-	[astring release];
 	
 	return success;
 }
