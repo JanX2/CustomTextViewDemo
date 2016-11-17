@@ -13,6 +13,7 @@
 @interface NSTextView (EditWithUndo)
 
 - (BOOL)setTextJX:(NSAttributedString *)attributedString;
+- (BOOL)deleteCharactersInRangeJX:(NSRange)range;
 - (BOOL)replaceCharactersInRange:(NSRange)range withTextJX:(NSAttributedString *)attributedString;
 - (BOOL)insertTextJX:(NSAttributedString *)attributedString atIndex:(NSUInteger)index;
 - (BOOL)insertTextJX:(NSAttributedString *)attributedString atIndex:(NSUInteger)index checkIndex:(BOOL)checkIndex;

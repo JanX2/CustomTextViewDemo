@@ -33,6 +33,29 @@
 	}
 }
 
+- (BOOL)deleteCharactersInRangeJX:(NSRange)range;
+{
+	NSString *stringForDelegate = @"";
+	
+	[[self.undoManager prepareWithInvocationTarget:self] setSelectedRangeWithUndoJX:self.selectedRange];
+	
+	// Call delegate methods to force undo recording.
+	if ([self shouldChangeTextInRange:range
+					replacementString:stringForDelegate]) {
+		
+		[self.textStorage deleteCharactersInRange:range];
+		
+		[self didChangeText];
+		
+		[self setSelectedRangeWithUndoJX:NSMakeRange(range.location, 0)];
+		
+		return YES;
+	}
+	else {
+		return NO;
+	}
+}
+
 - (BOOL)replaceCharactersInRange:(NSRange)range withTextJX:(NSAttributedString *)attributedString;
 {
 	NSString *insertingText = attributedString.string;
