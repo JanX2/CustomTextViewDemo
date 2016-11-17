@@ -12,16 +12,16 @@
 
 @implementation NSTextView (EditPlainTextWithUndo)
 
-- (void)setSelectedRangeWithUndo:(NSRange)range;
+- (void)setSelectedRangeWithUndoJX:(NSRange)range;
 {
 	[self setSelectedRange:range];
-	[[self.undoManager prepareWithInvocationTarget:self] setSelectedRangeWithUndo:range];
+	[[self.undoManager prepareWithInvocationTarget:self] setSelectedRangeWithUndoJX:range];
 }
 
-- (void)setSelectedRangesWithUndo:(NSArray *)ranges;
+- (void)setSelectedRangesWithUndoJX:(NSArray *)ranges;
 {
 	[self setSelectedRanges:ranges];
-	[[self.undoManager prepareWithInvocationTarget:self] setSelectedRangesWithUndo:ranges];
+	[[self.undoManager prepareWithInvocationTarget:self] setSelectedRangesWithUndoJX:ranges];
 }
 
 @end

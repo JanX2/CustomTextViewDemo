@@ -13,7 +13,7 @@
 
 @interface NSTextView (EditSelectionWithUndo)
 
-- (void)setSelectedRangeWithUndo:(NSRange)range;
-- (void)setSelectedRangesWithUndo:(NSArray *)ranges;
+- (void)setSelectedRangeWithUndoJX:(NSRange)range;
+- (void)setSelectedRangesWithUndoJX:(NSArray *)ranges;
 
 @end

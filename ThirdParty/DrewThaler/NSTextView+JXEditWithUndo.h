@@ -12,11 +12,11 @@
 
 @interface NSTextView (EditWithUndo)
 
-- (BOOL)setAttributedText:(NSAttributedString *)attributedString;
-- (BOOL)replaceCharactersInRange:(NSRange)range withAttributedText:(NSAttributedString *)attributedString;
-- (BOOL)insertAttributedText:(NSAttributedString *)attributedString atIndex:(NSUInteger)index;
-- (BOOL)insertAttributedText:(NSAttributedString *)attributedString atIndex:(NSUInteger)index checkIndex:(BOOL)checkIndex;
-- (BOOL)insertAttributedText:(NSAttributedString *)attributedString;
-- (BOOL)insertText:(NSString *)string withAttributes:(NSDictionary *)attr;
+- (BOOL)setTextJX:(NSAttributedString *)attributedString;
+- (BOOL)replaceCharactersInRange:(NSRange)range withTextJX:(NSAttributedString *)attributedString;
+- (BOOL)insertTextJX:(NSAttributedString *)attributedString atIndex:(NSUInteger)index;
+- (BOOL)insertTextJX:(NSAttributedString *)attributedString atIndex:(NSUInteger)index checkIndex:(BOOL)checkIndex;
+- (BOOL)insertTextJX:(NSAttributedString *)attributedString;
+- (BOOL)insertStringJX:(NSString *)string withAttributes:(NSDictionary *)attr;
 
 @end

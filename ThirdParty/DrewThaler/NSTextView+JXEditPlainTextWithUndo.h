@@ -13,10 +13,10 @@
 
 @interface NSTextView (EditPlainTextWithUndo)
 
-- (BOOL)setText:(NSString *)string;
-- (BOOL)replaceCharactersInRange:(NSRange)range withText:(NSString *)string;
-- (BOOL)insertText:(NSString *)string atIndex:(NSUInteger)index;
-- (BOOL)insertText:(NSString *)string atIndex:(NSUInteger)index checkIndex:(BOOL)checkIndex;
-- (BOOL)insertText:(NSString *)string;
+- (BOOL)setStringJX:(NSString *)string;
+- (BOOL)replaceCharactersInRange:(NSRange)range withStringJX:(NSString *)string;
+- (BOOL)insertStringJX:(NSString *)string atIndex:(NSUInteger)index;
+- (BOOL)insertStringJX:(NSString *)string atIndex:(NSUInteger)index checkIndex:(BOOL)checkIndex;
+- (BOOL)insertStringJX:(NSString *)string;
 
 @end

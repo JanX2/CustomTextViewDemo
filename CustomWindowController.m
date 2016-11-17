@@ -119,12 +119,12 @@ NSAttributedString * attributedStringForURL(NSURL *aURL, NSDictionary **document
 
 			NSUInteger charIndex = [destination dragTargetCharIndex];
 			
-			[destination insertAttributedText:attributedString atIndex:charIndex checkIndex:YES];
+			[destination insertTextJX:attributedString atIndex:charIndex checkIndex:YES];
 		}
 		else if (droppedFileProcessingType == 2) { // Replace
 			[undoManager setActionName:NSLocalizedString(@"Replace with Text File", @"Undo menu replace text string, without the 'Undo'")];
 
-			[destination setAttributedText:attributedString];
+			[destination setTextJX:attributedString];
 		}
 		else {
 			return NO;

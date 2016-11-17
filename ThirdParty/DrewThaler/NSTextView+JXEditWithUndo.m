@@ -13,9 +13,9 @@
 
 @implementation NSTextView (EditWithUndo)
 
-- (BOOL)setAttributedText:(NSAttributedString *)attributedString;
+- (BOOL)setTextJX:(NSAttributedString *)attributedString;
 {
-	[[self.undoManager prepareWithInvocationTarget:self] setSelectedRangeWithUndo:self.selectedRange];
+	[[self.undoManager prepareWithInvocationTarget:self] setSelectedRangeWithUndoJX:self.selectedRange];
 
 	if ([self shouldChangeTextInRange:NSMakeRange(0, [[self textStorage] length])
 					replacementString:[attributedString string]]) {
@@ -24,7 +24,7 @@
 		
 		[self didChangeText];
 
-		[self setSelectedRangeWithUndo:NSMakeRange(0, 0)];
+		[self setSelectedRangeWithUndoJX:NSMakeRange(0, 0)];
 		
 		return YES;
 	}
@@ -33,7 +33,7 @@
 	}
 }
 
-- (BOOL)replaceCharactersInRange:(NSRange)range withAttributedText:(NSAttributedString *)attributedString;
+- (BOOL)replaceCharactersInRange:(NSRange)range withTextJX:(NSAttributedString *)attributedString;
 {
 	NSString *insertingText = [attributedString string];
 	NSString *selectedText = [[self string] substringWithRange:range];
@@ -44,7 +44,7 @@
 		stringForDelegate = nil;
 	}
 	
-	[[self.undoManager prepareWithInvocationTarget:self] setSelectedRangeWithUndo:self.selectedRange];
+	[[self.undoManager prepareWithInvocationTarget:self] setSelectedRangeWithUndoJX:self.selectedRange];
 
 	// Call delegate methods to force undo recording
 	if ([self shouldChangeTextInRange:range
@@ -55,7 +55,7 @@
 
 		[self didChangeText];
 
-		[self setSelectedRangeWithUndo:NSMakeRange(range.location + [attributedString length], 0)];
+		[self setSelectedRangeWithUndoJX:NSMakeRange(range.location + [attributedString length], 0)];
 		
 		return YES;
 	}
@@ -64,13 +64,13 @@
 	}
 }
 
-- (BOOL)insertAttributedText:(NSAttributedString *)attributedString atIndex:(NSUInteger)index;
+- (BOOL)insertTextJX:(NSAttributedString *)attributedString atIndex:(NSUInteger)index;
 {
 	NSRange range = NSMakeRange(index, 0);
-	return [self replaceCharactersInRange:range withAttributedText:attributedString];
+	return [self replaceCharactersInRange:range withTextJX:attributedString];
 }
 
-- (BOOL)insertAttributedText:(NSAttributedString *)attributedString atIndex:(NSUInteger)index checkIndex:(BOOL)checkIndex;
+- (BOOL)insertTextJX:(NSAttributedString *)attributedString atIndex:(NSUInteger)index checkIndex:(BOOL)checkIndex;
 {
 	NSTextStorage *textStorage = [self textStorage];
 	NSUInteger textLength = [textStorage length];
@@ -79,22 +79,22 @@
 		index = textLength; // AFTER the last character in textStorage
 	}
 	
-	return [self insertAttributedText:attributedString atIndex:index];
+	return [self insertTextJX:attributedString atIndex:index];
 }
 
-- (BOOL)insertAttributedText:(NSAttributedString *)attributedString;
+- (BOOL)insertTextJX:(NSAttributedString *)attributedString;
 {
 	NSRange range = [self selectedRange];
-	return [self replaceCharactersInRange:range withAttributedText:attributedString];
+	return [self replaceCharactersInRange:range withTextJX:attributedString];
 }
 
-- (BOOL)insertText:(NSString *)string withAttributes:(NSDictionary *)attr;
+- (BOOL)insertStringJX:(NSString *)string withAttributes:(NSDictionary *)attr;
 {
 	BOOL success = NO;
 	NSAttributedString *astring =
 	[[NSAttributedString alloc] initWithString:string
 									attributes:attr];
-	success = [self insertAttributedText:astring];
+	success = [self insertTextJX:astring];
 	[astring release];
 	
 	return success;
