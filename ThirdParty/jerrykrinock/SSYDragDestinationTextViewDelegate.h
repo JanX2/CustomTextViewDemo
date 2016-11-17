@@ -1,9 +1,9 @@
-@class SSYDragDestinationTextView ;
+@class SSYDragDestinationTextView;
 
 @protocol SSYDragDestinationTextViewDelegate
 
 - (BOOL)performDragOperation:(id <NSDraggingInfo>)sender
-				 destination:(SSYDragDestinationTextView*)destination ;
+				 destination:(SSYDragDestinationTextView*)destination;
 /*
  This method should be implemented the same as -[NSObject performDragOperation]
  except that it has the additional argument which allows the dragging destination

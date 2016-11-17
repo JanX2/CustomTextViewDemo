@@ -3,7 +3,7 @@
 
 @interface NSView (FocusRing)
 
-- (void)drawFocusRing ;
+- (void)drawFocusRing;
 // Although the above method invokes -lockFocus, and thus will work if
 // invoked while not within -drawRect, it is recommended to invoke this
 // method from within -drawRect, to avoid the possibility of a 

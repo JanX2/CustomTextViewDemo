@@ -8,76 +8,76 @@
 
 #if ENABLE_TAB_TO_NEXT_KEY_VIEW
 - (void)setTabToNextKeyView:(BOOL)yn {
-	_tabToNextKeyView = yn ;
+	_tabToNextKeyView = yn;
 }
 
 - (void)keyDown:(NSEvent*)event {
-	NSString *s = [event charactersIgnoringModifiers] ;
-	unichar keyChar = 0 ;
+	NSString *s = [event charactersIgnoringModifiers];
+	unichar keyChar = 0;
 	if ([s length] == 1) {
-		keyChar = [s characterAtIndex:0] ;
+		keyChar = [s characterAtIndex:0];
 
 		// Our superclass NSTextView accepts tabs and backtabs as text.
 		// If we want _tabToNextKeyView, we re-implement the NSView behavior
 		// of selecting the next or previous key view
 		if ((keyChar == NSTabCharacter)&& _tabToNextKeyView) {
-			[[self window] selectNextKeyView:self] ;
+			[[self window] selectNextKeyView:self];
 		}
 		else if ((keyChar == NSBackTabCharacter) && _tabToNextKeyView) {
-			[[self window] selectPreviousKeyView:self] ;
+			[[self window] selectPreviousKeyView:self];
 		}
 		else {
 			// Handle using super's (i.e. NSTextView) -interpretKeyEvents:,
 			// which will typewrite the key-downed character
-			NSArray* events = [NSArray arrayWithObject:event] ;
-			[self interpretKeyEvents:events] ;
+			NSArray* events = [NSArray arrayWithObject:event];
+			[self interpretKeyEvents:events];
 		}
 	}
 }
 #endif
 
 - (NSDragOperation)draggingEntered:(id <NSDraggingInfo>)sender {
-	NSDragOperation answer = NSDragOperationNone ;
-	NSPasteboard* pasteboard = [sender draggingPasteboard] ;
+	NSDragOperation answer = NSDragOperationNone;
+	NSPasteboard* pasteboard = [sender draggingPasteboard];
 	NSString* anAcceptableType = [pasteboard availableTypeFromArray:self.registeredDraggedTypes];	
 	
 	if (anAcceptableType != nil) {
 		// Don't be hidden!!!...
-		[NSApp activateIgnoringOtherApps:YES] ;
-		[self.window makeKeyAndOrderFront:self] ;
+		[NSApp activateIgnoringOtherApps:YES];
+		[self.window makeKeyAndOrderFront:self];
 		
 		answer = NSDragOperationCopy ; // Accept data as a copy operation
 		
-		_isInDrag = YES ;
+		_isInDrag = YES;
 		_preDragSelectedRange = self.selectedRange;
-		[self selectAll:self] ;
-		[self setNeedsDisplay:YES] ;
+		[self selectAll:self];
+		[self setNeedsDisplay:YES];
 	}
 	
-	return answer ;
+	return answer;
 }
 
 // Called whenever a drag exits our drop zone
 - (void)draggingExited:(id <NSDraggingInfo>)sender {
-	_isInDrag = NO ;
-	[self setSelectedRange:_preDragSelectedRange] ;
-	[self setNeedsDisplay:YES] ;
+	_isInDrag = NO;
+	[self setSelectedRange:_preDragSelectedRange];
+	[self setNeedsDisplay:YES];
 }
 
 // Method to determine if we can accept the drop
 - (BOOL)prepareForDragOperation:(id <NSDraggingInfo>)sender {
-	BOOL answer = NO ;
+	BOOL answer = NO;
 	
-	NSPasteboard* pasteboard = [sender draggingPasteboard] ;
+	NSPasteboard* pasteboard = [sender draggingPasteboard];
 	NSString* anAcceptableType = [pasteboard availableTypeFromArray:self.registeredDraggedTypes];
 	if (anAcceptableType != nil) {
-		_isInDrag = NO ;
-		[self setSelectedRange:NSMakeRange(0,0)] ;
-		[self setNeedsDisplay:YES] ;
-		answer = YES ;
+		_isInDrag = NO;
+		[self setSelectedRange:NSMakeRange(0,0)];
+		[self setNeedsDisplay:YES];
+		answer = YES;
 	}
 	
-	return answer ;
+	return answer;
 } 
 
 // If they can potentially handle it, we forward the drop to the delegate, or else, its window's delegate
@@ -87,7 +87,7 @@
 	NSString *type = [pasteboard availableTypeFromArray:self.acceptableDragTypes];
 
 	if (type && [type isEqualToString:NSFilenamesPboardType]) {
-		BOOL success = NO ;
+		BOOL success = NO;
 		
 		if ([self respondsToSelector:@selector(delegate)]) {
 			success = [(id <SSYDragDestinationTextViewDelegate>)self.delegate 
@@ -100,10 +100,10 @@
 					   destination:self];
 		}
 		
-		return success ;
+		return success;
 	}
 	else {
-		return [super performDragOperation:sender] ;
+		return [super performDragOperation:sender];
 	}
 }
 
@@ -111,58 +111,58 @@
 }
 
 - (void)drawRect:(NSRect)rect {
-	[super drawRect:rect] ;
+	[super drawRect:rect];
 	if (_isInDrag) {
-		[self drawFocusRing] ;
+		[self drawFocusRing];
 	}
 }
 
 - (NSUInteger)dragTargetCharIndex {
 	NSTextContainer *textContainer = self.textContainer;
 	NSLayoutManager *layoutManager = self.layoutManager;
-	NSUInteger glyphIndex, charIndex ;
-	NSRect glyphRect ;
+	NSUInteger glyphIndex, charIndex;
+	NSRect glyphRect;
 	
 	NSPoint point = [self convertPoint:self.window.mouseLocationOutsideOfEventStream fromView:nil];
 	point.x -= self.textContainerOrigin.x;
 	point.y -= self.textContainerOrigin.y;
 	
 	// Convert those coordinates to the nearest glyph index
-	glyphIndex = [layoutManager glyphIndexForPoint:point inTextContainer:textContainer] ;
+	glyphIndex = [layoutManager glyphIndexForPoint:point inTextContainer:textContainer];
 	
 	// Check to see whether the mouse actually lies over the glyph it is nearest to
-	glyphRect = [layoutManager boundingRectForGlyphRange:NSMakeRange(glyphIndex, 1) inTextContainer:textContainer] ;
+	glyphRect = [layoutManager boundingRectForGlyphRange:NSMakeRange(glyphIndex, 1) inTextContainer:textContainer];
 	
 	if (NSPointInRect(point, glyphRect)) {
 		// Convert the glyph index to a character index
-		charIndex = [layoutManager characterIndexForGlyphAtIndex:glyphIndex] ;
+		charIndex = [layoutManager characterIndexForGlyphAtIndex:glyphIndex];
 	}
 	else {
-		charIndex = NSNotFound ;
+		charIndex = NSNotFound;
 	}
 	
-	return charIndex ;
+	return charIndex;
 }
 
 @end
 
 #if 0 
 - (BOOL)performDragOperation:(id <NSDraggingInfo>)info {
-	NSPasteboard* pasteboard = [info draggingPasteboard] ;
+	NSPasteboard* pasteboard = [info draggingPasteboard];
 	
-	NSArray* acceptableTypes ;
+	NSArray* acceptableTypes;
 	if ([self respondsToSelector:@selector(orderedRegisteredDraggedTypes)]) {
-		acceptableTypes = [self orderedRegisteredDraggedTypes] ;
+		acceptableTypes = [self orderedRegisteredDraggedTypes];
 	}
 	else {
-		acceptableTypes = [self registeredDraggedTypes] ;
+		acceptableTypes = [self registeredDraggedTypes];
 	}
 	NSString *bestType = [pasteboard availableTypeFromArray:acceptableTypes] ;	
 	
-	id object = nil ;
+	id object = nil;
 	
 	if ([bestType isEqualToString:@"MV Super-secret message transfer pasteboard type"]) {
-		NSLog(@"Tried drag of Apple Mail message: not supported yet.") ;
+		NSLog(@"Tried drag of Apple Mail message: not supported yet.");
 #if 0
 		// Three reasons why this code is commented out:
 		// 1.  Import takes 30 seconds or more.
@@ -177,59 +177,59 @@
 		// declared anywhere.  Maybe this could be fixed by using -classNamed:@"MyApp".
 		// But who do you send that instance message to?
 		NSBundle *bundle = [NSBundle bundleForClass:[self class]];
-		NSLog(@"Hullo!  bundlePath = %@", [bundle bundlePath]) ;
+		NSLog(@"Hullo!  bundlePath = %@", [bundle bundlePath]);
 		NSString *resourcePath = [bundle pathForResource: @"MailHelper"
 												  ofType: @"applescript"];
 		
-		NSLog(@"Hullo!  resourcePath = %@", resourcePath) ;
-		NSLog(@"Hullo!  1 Getting result from helper") ;
+		NSLog(@"Hullo!  resourcePath = %@", resourcePath);
+		NSLog(@"Hullo!  1 Getting result from helper");
 		NSAppleEventDescriptor *result =
 			[[CIPAppleScriptHelper sharedHelper] callInResource: resourcePath
-														 script: @"getSelectedMailCount"] ;
+														 script: @"getSelectedMailCount"];
 		
-		NSLog(@"Hullo!  1 result = %@", result) ;
-		NSMutableString* textFromMessages = [[NSMutableString alloc] init] ;
+		NSLog(@"Hullo!  1 result = %@", result);
+		NSMutableString* textFromMessages = [[NSMutableString alloc] init];
 		
 		if(result) {
 			NSInteger k;
 			NSString *mailMessage;
 			
-			NSLog(@"Hullo!  2 Getting result from helper") ;
+			NSLog(@"Hullo!  2 Getting result from helper");
 			result = [[CIPAppleScriptHelper sharedHelper] callInResource: resourcePath
 																  script: @"getSelectedMailBodies"];
-			NSLog(@"Hullo!  2 result = %@", result) ;
+			NSLog(@"Hullo!  2 result = %@", result);
 			NSInteger numberOfItems = [result numberOfItems];
-			NSLog(@"Hullo!  numberOfItems = %i", numberOfItems) ;
+			NSLog(@"Hullo!  numberOfItems = %i", numberOfItems);
 			for(k=1; k <= numberOfItems; k++) {
-				mailMessage = [[result descriptorAtIndex: k] stringValue] ;
-				NSLog(@"Hullo!  mailMessage = %@", mailMessage) ;
-				[textFromMessages appendString:mailMessage] ;
+				mailMessage = [[result descriptorAtIndex: k] stringValue];
+				NSLog(@"Hullo!  mailMessage = %@", mailMessage);
+				[textFromMessages appendString:mailMessage];
 			}		
 		}
 		
 		if ([textFromMessages length] > 0) {
-			object = [textFromMessages copy] ;
+			object = [textFromMessages copy];
 		}
 		
-		[textFromMessages release] ;
+		[textFromMessages release];
 #endif
 	}
 	
 	if (!object) {
-		object = [pasteboard propertyListForType:bestType] ;
+		object = [pasteboard propertyListForType:bestType];
 		if (!object) {
-			object = [pasteboard stringForType:bestType] ;
+			object = [pasteboard stringForType:bestType];
 			if (!object) {
-				object = [pasteboard dataForType:bestType] ;
+				object = [pasteboard dataForType:bestType];
 			}
 		}
 	}
 	
 	if (object) {
-		[[self target] performSelector:@selector(swallowDraggedObject:) withObject:object] ;
-		return YES ;
+		[[self target] performSelector:@selector(swallowDraggedObject:) withObject:object];
+		return YES;
 	}
 	
-	return NO ;
+	return NO;
 }
 #endif
