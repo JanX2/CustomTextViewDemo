@@ -7,7 +7,7 @@
 
 #import "CustomWindowController.h"
 
-#import "NSTextView+EditWithUndo.h"
+#import "NSTextView+JXEditWithUndo.h"
 
 
 NSAttributedString * attributedStringForURL(NSURL *aURL, NSDictionary **documentAttributes, NSError **outError) {

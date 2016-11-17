@@ -1,5 +1,5 @@
 //
-//  NSTextView+EditWithUndo.h
+//  NSTextView+JXEditWithUndo.h
 //  CustomTextViewDemo
 //
 //  Created by Jan on 04.10.11.

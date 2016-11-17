@@ -1,5 +1,5 @@
 //
-//  NSTextView+EditPlainTextWithUndo.h
+//  NSTextView+JXEditPlainTextWithUndo.h
 //  MarkdownLive
 //
 //  Created by Jan Weiß on 31.08.12. Some rights reserved: <http://opensource.org/licenses/mit-license.php>

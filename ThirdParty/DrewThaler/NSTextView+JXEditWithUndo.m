@@ -1,5 +1,5 @@
 //
-//  NSTextView+EditWithUndo.m
+//  NSTextView+JXEditWithUndo.m
 //  CustomTextViewDemo
 //
 //  Created by Jan on 04.10.11.
@@ -7,9 +7,9 @@
 
 // Based on DrewThaler’s post at http://www.cocoadev.com/index.pl?UndoSupportForNSTextStorage
 
-#import "NSTextView+EditWithUndo.h"
+#import "NSTextView+JXEditWithUndo.h"
 
-#import "NSTextView+EditSelectionWithUndo.h"
+#import "NSTextView+JXEditSelectionWithUndo.h"
 
 @implementation NSTextView (EditWithUndo)
 

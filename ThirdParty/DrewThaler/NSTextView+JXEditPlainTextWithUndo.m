@@ -1,5 +1,5 @@
 //
-//  NSTextView+EditPlainTextWithUndo.m
+//  NSTextView+JXEditPlainTextWithUndo.m
 //  MarkdownLive
 //
 //  Created by Jan Weiß on 31.08.12. Some rights reserved: <http://opensource.org/licenses/mit-license.php>
@@ -7,9 +7,9 @@
 
 // Based on DrewThaler’s post at http://www.cocoadev.com/index.pl?UndoSupportForNSTextStorage
 
-#import "NSTextView+EditPlainTextWithUndo.h"
+#import "NSTextView+JXEditPlainTextWithUndo.h"
 
-#import "NSTextView+EditSelectionWithUndo.h"
+#import "NSTextView+JXEditSelectionWithUndo.h"
 
 @implementation NSTextView (EditPlainTextWithUndo)
 
