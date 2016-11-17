@@ -11,10 +11,7 @@
 #import "SSYDragDestinationTextViewDelegate.h"
 
 @interface CustomWindowController : NSWindowController <SSYDragDestinationTextViewDelegate> {
-	IBOutlet SSYDragDestinationTextView *	customTextView;
-
-	NSURL *		lastFileURL;
-	NSInteger	droppedFileProcessingType;
+	IBOutlet SSYDragDestinationTextView *_customTextView;
 }
 
 @property (nonatomic, retain) NSURL *lastFileURL;

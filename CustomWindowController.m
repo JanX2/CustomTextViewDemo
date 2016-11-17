@@ -29,14 +29,11 @@ NSAttributedString * attributedStringForURL(NSURL *aURL, NSDictionary **document
 
 @implementation CustomWindowController
 
-@synthesize lastFileURL;
-@synthesize droppedFileProcessingType;
-
 - (instancetype)init
 {
 	if (self = [super init]) {
-		lastFileURL = nil;
-		droppedFileProcessingType = 2;
+		_lastFileURL = nil;
+		_droppedFileProcessingType = 2;
 	}
 	
 	return self;
@@ -51,8 +48,8 @@ NSAttributedString * attributedStringForURL(NSURL *aURL, NSDictionary **document
 
 - (void)awakeFromNib
 {
-	[customTextView unregisterDraggedTypes];
-	[customTextView registerForDraggedTypes:[NSAttributedString textTypes]];
+	[_customTextView unregisterDraggedTypes];
+	[_customTextView registerForDraggedTypes:[NSAttributedString textTypes]];
 }
 
 - (BOOL)performDragOperation:(id <NSDraggingInfo>)sender
@@ -73,7 +70,7 @@ NSAttributedString * attributedStringForURL(NSURL *aURL, NSDictionary **document
 #endif
 	
 	// Filter out unwelcome destinations
-	if (![destination isEqual:customTextView]) {
+	if (![destination isEqual:_customTextView]) {
 		return NO;
 	}
 	
@@ -113,14 +110,14 @@ NSAttributedString * attributedStringForURL(NSURL *aURL, NSDictionary **document
 		
 		NSUndoManager *undoManager = self.window.undoManager;
 
-		if (droppedFileProcessingType == 1) { // Insert
+		if (_droppedFileProcessingType == 1) { // Insert
 			[undoManager setActionName:NSLocalizedString(@"Insert Text from File", @"Undo menu insert text string, without the 'Undo'")];
 
 			NSUInteger charIndex = [destination dragTargetCharIndex];
 			
 			[destination insertTextJX:attributedString atIndex:charIndex checkIndex:YES];
 		}
-		else if (droppedFileProcessingType == 2) { // Replace
+		else if (_droppedFileProcessingType == 2) { // Replace
 			[undoManager setActionName:NSLocalizedString(@"Replace with Text File", @"Undo menu replace text string, without the 'Undo'")];
 
 			[destination setTextJX:attributedString];

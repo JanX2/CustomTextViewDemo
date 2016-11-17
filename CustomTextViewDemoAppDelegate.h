@@ -8,7 +8,6 @@
 #import <Cocoa/Cocoa.h>
 
 @interface CustomTextViewDemoAppDelegate : NSObject <NSApplicationDelegate> {
-    NSWindow *window;
 }
 
 @property (assign) IBOutlet NSWindow *window;

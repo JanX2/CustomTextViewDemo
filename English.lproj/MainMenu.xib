@@ -797,7 +797,7 @@ Cg
         </customObject>
         <customObject id="537" customClass="CustomWindowController">
             <connections>
-                <outlet property="customTextView" destination="536" id="540"/>
+                <outlet property="_customTextView" destination="536" id="QaN-tm-j5X"/>
                 <outlet property="window" destination="371" id="538"/>
             </connections>
         </customObject>
