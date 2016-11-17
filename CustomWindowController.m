@@ -11,7 +11,7 @@
 
 
 NSAttributedString * attributedStringForURL(NSURL *aURL, NSDictionary **documentAttributes, NSError **outError) {
-	NSDictionary *documentOptions = [NSDictionary dictionary];
+	NSDictionary *documentOptions = @{};
 	NSError *error;
 	NSAttributedString *attributedString = [[NSAttributedString alloc] initWithURL:aURL
 																		   options:documentOptions
@@ -32,7 +32,7 @@ NSAttributedString * attributedStringForURL(NSURL *aURL, NSDictionary **document
 @synthesize lastFileURL;
 @synthesize droppedFileProcessingType;
 
-- (id)init
+- (instancetype)init
 {
 	if (self = [super init]) {
 		lastFileURL = nil;
@@ -80,25 +80,24 @@ NSAttributedString * attributedStringForURL(NSURL *aURL, NSDictionary **document
 	// Thanks to Kyle Sluder who posted this as “Re: Proper UTI for accepting files dropped on my table view?”
 	NSArray *fileURLs =
 	[[sender draggingPasteboard]
-	 readObjectsForClasses:[NSArray arrayWithObject:[NSURL class]]
-	 options:[NSDictionary dictionaryWithObject:[NSNumber numberWithBool:YES]
-										 forKey:NSPasteboardURLReadingFileURLsOnlyKey]];
+	 readObjectsForClasses:@[[NSURL class]]
+	 options:@{NSPasteboardURLReadingFileURLsOnlyKey: @YES}];
 	
 #if ENABLE_LOGGING
 	NSLog(@"%@", fileURLs);
 #endif
 	
-	if ([fileURLs count] == 1) {
-		self.lastFileURL = [fileURLs objectAtIndex:0];
+	if (fileURLs.count == 1) {
+		self.lastFileURL = fileURLs[0];
 		
 		NSDictionary *documentAttributes;
 		NSError *error;
 		NSAttributedString *attributedString = attributedStringForURL(self.lastFileURL, &documentAttributes, &error);
 		
 		if (attributedString == nil) {
-			NSWindow *myWindow = [self window];
+			NSWindow *myWindow = self.window;
 			
-			if ((myWindow != nil) && [myWindow isVisible]) {
+			if ((myWindow != nil) && myWindow.visible) {
 				[self presentError:error 
 					modalForWindow:myWindow 
 						  delegate:self 
@@ -112,7 +111,7 @@ NSAttributedString * attributedStringForURL(NSURL *aURL, NSDictionary **document
 			return NO;
 		}
 		
-		NSUndoManager *undoManager = [[self window] undoManager];
+		NSUndoManager *undoManager = self.window.undoManager;
 
 		if (droppedFileProcessingType == 1) { // Insert
 			[undoManager setActionName:NSLocalizedString(@"Insert Text from File", @"Undo menu insert text string, without the 'Undo'")];

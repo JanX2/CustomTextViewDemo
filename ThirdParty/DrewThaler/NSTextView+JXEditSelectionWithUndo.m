@@ -20,7 +20,7 @@
 
 - (void)setSelectedRangesWithUndoJX:(NSArray *)ranges;
 {
-	[self setSelectedRanges:ranges];
+	self.selectedRanges = ranges;
 	[[self.undoManager prepareWithInvocationTarget:self] setSelectedRangesWithUndoJX:ranges];
 }
 

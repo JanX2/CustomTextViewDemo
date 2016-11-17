@@ -4,7 +4,7 @@
 
 - (void)drawFocusRing {
 	[[NSColor keyboardFocusIndicatorColor] set];
-	NSRect rect = [self visibleRect] ;
+	NSRect rect = self.visibleRect;
 	[NSGraphicsContext saveGraphicsState];
 	NSSetFocusRingStyle(NSFocusRingOnly);
 	NSFrameRect(rect);

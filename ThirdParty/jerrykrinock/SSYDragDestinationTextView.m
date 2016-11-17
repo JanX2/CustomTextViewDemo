@@ -39,12 +39,12 @@
 - (NSDragOperation)draggingEntered:(id <NSDraggingInfo>)sender {
 	NSDragOperation answer = NSDragOperationNone ;
 	NSPasteboard* pasteboard = [sender draggingPasteboard] ;
-	NSString* anAcceptableType = [pasteboard availableTypeFromArray:[self registeredDraggedTypes]];	
+	NSString* anAcceptableType = [pasteboard availableTypeFromArray:self.registeredDraggedTypes];	
 	
 	if (anAcceptableType != nil) {
 		// Don't be hidden!!!...
 		[NSApp activateIgnoringOtherApps:YES] ;
-		[[self window] makeKeyAndOrderFront:self] ;
+		[self.window makeKeyAndOrderFront:self] ;
 		
 		answer = NSDragOperationCopy ; // Accept data as a copy operation
 		
@@ -69,7 +69,7 @@
 	BOOL answer = NO ;
 	
 	NSPasteboard* pasteboard = [sender draggingPasteboard] ;
-	NSString* anAcceptableType = [pasteboard availableTypeFromArray:[self registeredDraggedTypes]] ;
+	NSString* anAcceptableType = [pasteboard availableTypeFromArray:self.registeredDraggedTypes];
 	if (anAcceptableType != nil) {
 		_isInDrag = NO ;
 		[self setSelectedRange:NSMakeRange(0,0)] ;
@@ -84,20 +84,20 @@
 // We pass it to super if they can’t handle the drag.
 - (BOOL)performDragOperation:(id <NSDraggingInfo>)sender {
 	NSPasteboard *pasteboard = [sender draggingPasteboard];
-	NSString *type = [pasteboard availableTypeFromArray:[self acceptableDragTypes]];
+	NSString *type = [pasteboard availableTypeFromArray:self.acceptableDragTypes];
 
 	if (type && [type isEqualToString:NSFilenamesPboardType]) {
 		BOOL success = NO ;
 		
 		if ([self respondsToSelector:@selector(delegate)]) {
-			success = [(id <SSYDragDestinationTextViewDelegate>)[self delegate] 
+			success = [(id <SSYDragDestinationTextViewDelegate>)self.delegate 
 					   performDragOperation:sender
-					   destination:self] ;
+					   destination:self];
 		}
-		else if ([[[self window] delegate] respondsToSelector:@selector(performDragOperation:destination:)]) {
-			success = [(id <SSYDragDestinationTextViewDelegate>)[[self window] delegate] 
+		else if ([self.window.delegate respondsToSelector:@selector(performDragOperation:destination:)]) {
+			success = [(id <SSYDragDestinationTextViewDelegate>)self.window.delegate 
 					   performDragOperation:sender
-					   destination:self] ;
+					   destination:self];
 		}
 		
 		return success ;
@@ -118,14 +118,14 @@
 }
 
 - (NSUInteger)dragTargetCharIndex {
-	NSTextContainer *textContainer = [self textContainer] ;
-	NSLayoutManager *layoutManager = [self layoutManager] ;
+	NSTextContainer *textContainer = self.textContainer;
+	NSLayoutManager *layoutManager = self.layoutManager;
 	NSUInteger glyphIndex, charIndex ;
 	NSRect glyphRect ;
 	
-	NSPoint point = [self convertPoint:[[self window] mouseLocationOutsideOfEventStream] fromView:nil] ;
-	point.x -= [self textContainerOrigin].x ;
-	point.y -= [self textContainerOrigin].y ;
+	NSPoint point = [self convertPoint:self.window.mouseLocationOutsideOfEventStream fromView:nil];
+	point.x -= self.textContainerOrigin.x;
+	point.y -= self.textContainerOrigin.y;
 	
 	// Convert those coordinates to the nearest glyph index
 	glyphIndex = [layoutManager glyphIndexForPoint:point inTextContainer:textContainer] ;

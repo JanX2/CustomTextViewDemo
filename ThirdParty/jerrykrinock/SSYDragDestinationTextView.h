@@ -19,10 +19,10 @@
  */
 
 @interface SSYDragDestinationTextView : NSTextView {
-	BOOL _isInDrag ;
+	BOOL _isInDrag;
 	NSRange _preDragSelectedRange;
 #if ENABLE_TAB_TO_NEXT_KEY_VIEW
-	BOOL _tabToNextKeyView ;
+	BOOL _tabToNextKeyView;
 #endif
 }
 
@@ -35,7 +35,7 @@
  Setting this to YES tells it to tab to the next key view, like an NSTextField does.
  @param    YES  to tab to the next key view, NO for the default NSTextView behavior.
 */
-- (void)setTabToNextKeyView:(BOOL)yn ;
+- (void)setTabToNextKeyView:(BOOL)yn;
 #endif
 
 /*!
@@ -43,7 +43,7 @@
  
  @details  When implementing -performDragOperation:destination: in the delegate, it can be helpful to know what character in the textStorage was the target of the current drag operation. This method returns the index of that character or NSNotFound if it cannot be determined.
  */
-- (NSUInteger)dragTargetCharIndex ;
+@property (nonatomic, readonly) NSUInteger dragTargetCharIndex;
 
 @end
 

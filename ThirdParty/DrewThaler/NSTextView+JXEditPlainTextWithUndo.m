@@ -17,9 +17,9 @@
 {
 	[[self.undoManager prepareWithInvocationTarget:self] setSelectedRangeWithUndoJX:self.selectedRange];
 
-	NSTextStorage *textStorage = [self textStorage];
+	NSTextStorage *textStorage = self.textStorage;
 	
-	if ([self shouldChangeTextInRange:NSMakeRange(0, [textStorage length])
+	if ([self shouldChangeTextInRange:NSMakeRange(0, textStorage.length)
 					replacementString:string]) {
 		
 		[textStorage.mutableString setString:string];
@@ -37,7 +37,7 @@
 
 - (BOOL)replaceCharactersInRange:(NSRange)range withStringJX:(NSString *)string;
 {
-	NSString *selectedText = [[self string] substringWithRange:range];
+	NSString *selectedText = [self.string substringWithRange:range];
 	NSString *stringForDelegate = string;
 	
 	// If only attributes are changing, pass nil.
@@ -56,7 +56,7 @@
 
 		[self didChangeText];
 
-		[self setSelectedRangeWithUndoJX:NSMakeRange(range.location + [string length], 0)];
+		[self setSelectedRangeWithUndoJX:NSMakeRange(range.location + string.length, 0)];
 		
 		return YES;
 	}
@@ -73,7 +73,7 @@
 
 - (BOOL)insertStringJX:(NSString *)attributedString atIndex:(NSUInteger)index checkIndex:(BOOL)checkIndex;
 {
-	NSUInteger textLength = [self.textStorage length];
+	NSUInteger textLength = self.textStorage.length;
 
 	if (checkIndex && (index == NSNotFound || !(index <= textLength))) {
 		index = textLength; // AFTER the last character in textStorage
