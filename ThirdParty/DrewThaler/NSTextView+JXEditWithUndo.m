@@ -2,7 +2,7 @@
 //  NSTextView+JXEditWithUndo.m
 //  CustomTextViewDemo
 //
-//  Created by Jan on 04.10.11.
+//  Created by Jan Weiß on 04.10.11. Some rights reserved: <http://opensource.org/licenses/mit-license.php>
 //
 
 // Based on DrewThaler’s post at http://www.cocoadev.com/index.pl?UndoSupportForNSTextStorage
