@@ -52,7 +52,7 @@
 					replacementString:stringForDelegate]) {
 
 		[self.textStorage.mutableString replaceCharactersInRange:range
-								withString:string];
+													  withString:string];
 
 		[self didChangeText];
 
